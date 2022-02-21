@@ -55,13 +55,6 @@ macadmins_python_version="v.3.9.5.09222021234106"
 macadmins_python_url="https://api.github.com/repos/macadmins/python/releases/tags/$macadmins_python_version"
 macadmins_python_path="/Library/ManagedFrameworks/Python/Python3.framework/Versions/Current/bin/python3"
 
-# Dialog helper apps
-jamfHelper="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
-depnotify_app="/Applications/Utilities/DEPNotify.app"
-depnotify_log="/var/tmp/depnotify.log"
-depnotify_confirmation_file="/var/tmp/com.depnotify.provisioning.done"
-depnotify_download_url="https://files.nomad.menu/DEPNotify.pkg"
-
 
 ###################
 ## LOCALIZATIONS ##
@@ -620,14 +613,6 @@ create_launchdaemon_to_remove_workdir () {
     /usr/sbin/chown root:wheel "$launch_daemon"
     /bin/chmod 644 "$launch_daemon"
 }
-
-dep_notify() {
-    # configuration taken from https://github.com/jamf/DEPNotify-Starter
-    DEP_NOTIFY_CONFIG_PLIST="/Users/$current_user/Library/Preferences/menu.nomad.DEPNotify.plist"
-    # /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" pathToPlistFile "$DEP_NOTIFY_USER_INPUT_PLIST"
-    STATUS_TEXT_ALIGN="center"
-    /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" statusTextAlignment "$STATUS_TEXT_ALIGN"
-    chown "$current_user":staff "$DEP_NOTIFY_CONFIG_PLIST"
 
     # Configure the window's look
     echo "Command: Image: $dn_icon" >> "$depnotify_log"
